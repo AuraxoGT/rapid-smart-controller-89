@@ -14,6 +14,12 @@ const handleInteraction = async (interaction) => {
     return;
   }
 
+  if (interaction.isButton() && interaction.customId === 'end_application') {
+    await interaction.deferUpdate();
+    await interaction.user.send('Your application has been canceled.');
+    return;
+  }
+  
   if (interaction.isCommand()) {
     await handleApplication(interaction);
   }
